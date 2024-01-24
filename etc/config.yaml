@@ -1,0 +1,137 @@
+auto_onboard_users: true
+log_level: debug
+login_token_expiry: "168h"
+membership_checker_interval: "6h"
+mode: "stage"
+admin_users: [ "algorand:<address>",
+               "xrpl:<address>"]
+
+server:
+  debug: "true"
+  accepted_versions: [ "v1" ]
+  port: 8080
+  api_scheme: "https"
+  host: "app.notiboy.com"
+  api_prefix: "/api"
+  api_version: "/v1"
+  redirect_prefix: https://app.notiboy.com
+
+chain:
+  supported: [ "algorand", "xrpl" ]
+  block_timer_interval: "30m"
+#  this should always be more than the interval
+  block_ttl: "40m"
+  pricing_api: "https://api.coingecko.com/api/v3/simple/price?ids=%s&vs_currencies=%s"
+
+algorand:
+  fund:
+    mainnet:
+      asset: 31566704
+      address: "5KX4MNVWP2X5YKZS5RKSPAOZZIJRSKHKN7Z3JDH7FWDB7IRXXR4LWB2URI"
+    testnet:
+      asset: 10458941
+      address: "VRRIASVEG3U3LHECHXINO2XIY7MV6P4YHR7C3XLDOKR7YFF3LOW3UD46AM"
+  block_creation_pace_per_minute: "16"
+  block_leeway_time: "10m"
+  daemon:
+    mainnet:
+      address: "https://mainnet-api.algonode.cloud"
+      token: ""
+    testnet:
+      address: "https://testnet-api.algonode.cloud"
+      token: ""
+
+xrpl:
+  fund:
+    mainnet:
+      address: "r9Ex3yGb6cZtgBB8tSGpSdPPRCnynSeP9m"
+    testnet:
+      address: "rh7byJ3kXb6tDMANa3k6efEPfptkYu2qYG"
+  ledger_creation_pace_per_minute: "21"
+  ledger_leeway_time: "10m"
+  daemon:
+    mainnet:
+      address: "https://s1.ripple.com:51234"
+      token: ""
+    testnet:
+      address: "https://s.altnet.rippletest.net:51234"
+      token: ""
+
+db:
+  host: "localhost:9042"
+  keyspace: "stage"
+  username: ""
+  password: ""
+
+migration:
+  allowed: []
+
+logo:
+#  50 KB, in bytes
+  maxSize: 51200
+  maxX: 25
+  maxY: 25
+  supported_types: ["png","jpeg", "jpg"]
+
+ttl:
+#  365 days
+  metrics: 31536000
+#  4 hours
+  verify_token: 14400
+#  7 days
+  notifications: 604800
+#  5 years
+  pat_token: "43830h"
+#  31 days
+  user_total_send: 2678400
+  #  7 days
+  fcm: 604800
+
+email:
+  username: "AKIAVIBN235J3UXXQB36"
+  password: ""
+  region: "eu-north-1"
+  notification:
+    from: "notification-noreply@notiboy.com"
+    sender_name: "Notiboy Digest"
+  verify:
+    from: "notification-noreply@notiboy.com"
+    sender_name: "Notiboy Verification"
+
+discord:
+  client_id: 1110131815672459295
+  client_secret: ""
+  redirect_uri: "/api/v1/verify/discord"
+  bot_token: ""
+  bot_server_id:
+
+firebase:
+  path: /etc/notiboy/firebase.json
+
+chat:
+  personal:
+    ttl: 604800
+  group:
+    ttl: 604800
+
+dns:
+  algorand:
+    mainnet:
+      nfd:
+        url: https://api.nf.domains
+        path: nfd/lookup?view=tiny&allowUnverified=false
+    testnet:
+      nfd:
+        url: https://api.nf.domains
+        path: nfd/lookup?view=tiny&allowUnverified=false
+  xrpl:
+    mainnet:
+      xrpns:
+        url: https://gamma.api.xrpns.com
+        path: resolveAddressSafe/%s
+        token:
+    testnet:
+      xrpns:
+        url: https://gamma.api.xrpns.com
+        path: resolveAddressSafe/%s
+        token:
